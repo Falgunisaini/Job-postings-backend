@@ -1,12 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const fetch = require("node-fetch");
-const serverless = require("serverless-http");
+// const serverless = require("serverless-http");
 
 const app = express();
 app.use(cors());
 
 const API_KEY = process.env.JOBS_API_KEY;
+const PORT = process.env.PORT || 5001;
 
 app.get("/api/jobs", async (req, res) => {
   try {
@@ -34,5 +35,6 @@ app.get("/api/jobs", async (req, res) => {
   }
 });
 
-module.exports = app;
-module.exports.handler = serverless(app);
+app.listen(PORT, () => {
+  console.log("Server running on http://localhost:5001");
+});
